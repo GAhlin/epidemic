@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+    <!--数据库基本数据设置-->
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+        <!--实现分页功能的插件    -->
+        <plugin  type="org.mybatis.generator.plugins.RowBoundsPlugin"></plugin>
+
+        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/epidemic?serverTimezone=UTC"
+                        userId="root"
+                        password="root">
+            <property name="nullCatalogMeansCurrent" value="true"/>
+        </jdbcConnection>
+
+        <javaTypeResolver >
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+
+        <!--model所在的位置-->
+        <javaModelGenerator targetPackage="com.gavin.epidemic.model" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+        <!--xml所在的位置-->
+        <sqlMapGenerator targetPackage="mapper"  targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+
+        <!--xml映射的mapper-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.gavin.epidemic.mapper"  targetProject="src/main/java">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+
+        <!--连接数据库中的表，重要属性为 tableName-->
+        <table tableName="epidemics" domainObjectName="Epidemics" ></table>
+        <table tableName="provinces" domainObjectName="Provinces" ></table>
+        <table tableName="user" domainObjectName="User" ></table>
+
+    </context>
+</generatorConfiguration>
